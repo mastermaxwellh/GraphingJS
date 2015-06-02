@@ -13,17 +13,11 @@ var Ray = function (id, endPointX, endPointY, direction) {
     };
 };
 
-var Line = function (id, yInterceptX, yInterceptY, xInterceptX, xInterceptY) {
+var Line = function (id, yInterceptid, xInterceptid, yInterceptX, yInterceptY, xInterceptX, xInterceptY) {
     this.id = id;
     
-    this.yIntercept = {
-        x : yInterceptX,
-        y : yInterceptY
-    };
-    this.xIntercept = {
-        x : xInterceptX,
-        y : xInterceptY
-    };
+    this.yIntercept = new Point (yInterceptid, yInterceptX, yInterceptY);
+    this.xIntercept = new Point (xInterceptid, xInterceptX, xinterceptY);
     
     this.rule = null;
     
@@ -54,18 +48,8 @@ var System = function (id) {
         
     ];
     
-    this.addLine = function (yInterceptX, yInterceptY, xInterceptX, xInterceptY) {
-        this.lines.push({
-            rule: null,
-            xIntercept: {
-                x: xInterceptX,
-                y: xInterceptY
-            },
-            yIntercept: {
-                x: yInterceptX,
-                y: yInterceptY
-            }
-        });
+    this.newLine = function (id, yInterceptid, xInterceptid, yInterceptX, yInterceptY, xInterceptX, xInterceptY) {
+        this.lines.push(new Line(id, yInterceptid, xInterceptid, yInterceptX, yInterceptY, xInterceptX, xInterceptY));
     };
 };
 
@@ -73,13 +57,10 @@ var ScatterPlot = function (id) {
     this.id = id;
     this.lineOfBestFit = null;
     this.points = [
-    
+        
     ];
-    this.newPoint = function (x, y) {
-        this.points.push({
-            x: x,
-            y: y
-        });
+    this.newPoint = function (id, x, y) {
+        this.points.push(new Point(id, x, y));
     };
 };
 
